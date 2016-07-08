@@ -4,6 +4,14 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
     <servlet>
+        <servlet-name>IndexController</servlet-name>
+        <servlet-class>sdkd.com.ec.controller.IndexController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IndexController</servlet-name>
+        <url-pattern>/index.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>EbNewsController</servlet-name>
         <servlet-class>sdkd.com.ec.controller.EbNewsController</servlet-class>
     </servlet>
@@ -20,4 +28,17 @@
         <servlet-name>EbPCategoryController</servlet-name>
         <url-pattern>/pca.do</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EbProductController</servlet-name>
+        <servlet-class>sdkd.com.ec.controller.EbProductController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EbProductController</servlet-name>
+        <url-pattern>/pro.do</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>/welcome.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>

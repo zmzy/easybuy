@@ -142,7 +142,7 @@ function goBuy(id, price)
 		newCookie = id;
 	}
 	setCookie("product", newCookie);
-	location.href = "shopping.html";
+	location.href = "shopping.do?id="+id;
 }
 
 function delShopping(id)
