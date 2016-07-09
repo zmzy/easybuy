@@ -1,5 +1,6 @@
 package sdkd.com.ec.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by SDUST-132 on 2016/7/8.
  */
 public class ShoppingCart {
-    private List<ShoppingCartItem> items;
+    private List<ShoppingCartItem> items = new ArrayList<ShoppingCartItem>();
     public void addItem(EbProduct product, long quantity) {
         items.add(new ShoppingCartItem(product, quantity));
     }

@@ -29,6 +29,7 @@
         <url-pattern>/pca.do</url-pattern>
     </servlet-mapping>
 
+    <!--商品Servlet-->
     <servlet>
         <servlet-name>EbProductController</servlet-name>
         <servlet-class>sdkd.com.ec.controller.EbProductController</servlet-class>
@@ -36,6 +37,16 @@
     <servlet-mapping>
         <servlet-name>EbProductController</servlet-name>
         <url-pattern>/pro.do</url-pattern>
+    </servlet-mapping>
+
+    <!--购物车Servlet-->
+    <servlet>
+        <servlet-name>EbShoppingController</servlet-name>
+        <servlet-class>sdkd.com.ec.controller.EbShoppingController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EbShoppingController</servlet-name>
+        <url-pattern>/shopping.do</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>

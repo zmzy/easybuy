@@ -24,6 +24,7 @@ public class EbShoppingController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        boolean issame =false;
         //1.获取商品ID
         String paramsId = request.getParameter("id");
         int id = 0;
@@ -46,13 +47,17 @@ public class EbShoppingController extends HttpServlet {
                     EbProduct itemPro = item.getProduct();
                     if(itemPro.getEpId()==id){
                         item.setQuantity(item.getQuantity()+1);
+                        issame = true;  //标识
                     }
                 }
             }
             //若不存在，则直接添加，数量默认为1
-            cart.addItem(product,1);
+            if(!issame) {
+                cart.addItem(product, 1);
+            }
         }
         request.getSession().setAttribute("cart",cart);
+        request.getRequestDispatcher("/shopping.jsp").forward(request,response);
     }
 
     /**

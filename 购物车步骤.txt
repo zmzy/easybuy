@@ -1,0 +1,23 @@
+1.商品列表&合计
+  ShoppingCart.java
+  List<ShoppingCartItem> items;
+  cost
+
+2.商品明细
+  单个商品&商品数量&同种商品的总价
+  ShoppingCartItem.java
+  Product product
+  cost
+  count
+
+3.ShoppingServlet
+  （1）session保存
+       //判断session是否存在 cart
+        存在-->session cart not null
+            相同-->增数量
+            不同-->增商品
+        不存在-->session cart is null
+            增商品(通过传递id得到商品，存入到ShoppingCartItem中) items.add(item);
+  （2）表保存
+
+

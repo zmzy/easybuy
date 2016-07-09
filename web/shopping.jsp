@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -62,20 +63,22 @@
                     <th>购买数量</th>
                     <th>操作</th>
                 </tr>
+                <c:forEach var="cart" items="${cart.items}">
                 <tr id="product_id_1">
-                    <td class="thumb"><img src="images/product/0_tiny.gif" /><a href="product-view.html">铁三角 Audio-Technica ATH-EQ300M-SV 银色 挂耳式耳机</a></td>
+                    <td class="thumb"><img src="${cart.product.epFileName}" /><a href="pro.do?id=${product.epId}&action=detail">${cart.product.epName}</a></td>
                     <td class="price" id="price_id_1">
-                        <span>￥99.00</span>
-                        <input type="hidden" value="99" />
+                        <span>￥${cart.cost}</span>
+                        <input type="hidden" value="${cart.cost}" />
                     </td>
                     <td class="number">
                         <dl>
-                            <dt><input id="number_id_1" type="text" name="number" value="1" /></dt>
+                            <dt><input id="number_id_1" type="text" name="number" value="${cart.quantity}" /></dt>
                             <dd onclick="reloadPrice(1,true);">修改</dd>
                         </dl>
                     </td>
                     <td class="delete"><a href="javascript:delShopping(1);">删除</a></td>
                 </tr>
+                </c:forEach>
             </table>
             <div class="button"><input type="submit" value="" /></div>
         </form>
