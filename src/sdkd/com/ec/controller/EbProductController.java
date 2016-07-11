@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,12 +28,41 @@ public class EbProductController extends HttpServlet {
         String action = request.getParameter("action");
         if(action != null && !"".equals(action)){
             if("list".equals(action)){
-
+                list(request, response);
             }else if("detail".equals(action)){
                 detail(request, response);
             }
         }
 
+    }
+
+    /**
+     * 商品详情
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String pageIndexParam = request.getParameter("pageIndex");
+        String pageSizeParam = request.getParameter("pageSize");
+        int pageIndex  = 1;
+        int pageSize = 4;
+        if(pageIndexParam!=null && !"".equals(pageIndexParam)){
+            pageIndex = Integer.parseInt(pageIndexParam);
+        }
+        if(pageSizeParam!=null && !"".equals(pageSizeParam)){
+            pageSize = Integer.valueOf(pageSizeParam);
+        }
+        List<EbProduct> productList = productDao.getProductPager(pageIndex,pageSize);
+        int count = productDao.getProductCount();
+        int totalPage  = count % pageSize == 0 ?(count/pageSize):((count/pageSize)+1);
+
+        request.setAttribute("productList",productList);
+        request.setAttribute("totalPage",totalPage);  //总记录数
+
+        //跳转页面
+        request.getRequestDispatcher("/product-list.jsp").forward(request,response);
     }
 
     /**

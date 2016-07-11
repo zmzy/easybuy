@@ -5,8 +5,8 @@ package sdkd.com.ec.model;
  */
 public class ShoppingCartItem {
     private EbProduct product;  //商品对象
-    private long quantity;  //数量
-    private double cost;  //总金额
+    private Long quantity;  //数量
+    private Double cost;  //总金额
 
     public ShoppingCartItem(EbProduct product, long quantity) {
         this.product = product;
@@ -14,11 +14,11 @@ public class ShoppingCartItem {
         this.cost = product.getEpPrice() * quantity;
     }
 
-    public long getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(long quantity) {
+    public void setQuantity(Long quantity) {
         this.quantity = quantity;
         this.cost = product.getEpPrice() * quantity;
     }

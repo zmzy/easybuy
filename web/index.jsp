@@ -68,7 +68,7 @@
             </c:if>
             <c:forEach var="pca" items="${categoryList}">
             <c:if test="${ca.epcId==pca.epcParentId}">
-              <dd><a href="product-list.html">${pca.epcname}</a></dd>
+              <dd><a href="/pro.do?action=list">${pca.epcname}</a></dd>
             </c:if>
               </c:forEach>
           </c:forEach>

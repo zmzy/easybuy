@@ -1,5 +1,7 @@
 package sdkd.com.ec.dao;
 
+import sdkd.com.ec.model.EbProduct;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
@@ -78,6 +80,11 @@ public class BaseDao {
                 }
             }
             result = ps.executeUpdate();
+            //获取自动增长列
+            rs = ps.getGeneratedKeys();
+            if(rs.next()){
+                result = rs.getInt(1);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -96,6 +103,32 @@ public class BaseDao {
             if(params!=null && params.size()>0){
                 for(int i=0;i<params.size();i++){
                     ps.setString((i+1),params.get(i));
+                }
+            }
+            rs = ps.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    //R
+    public ResultSet myExecuteSearch(String sql, List<Object> params){
+        //JDBC的步骤
+        ResultSet rs = null;
+        try {
+            con = this.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            if(params!=null && params.size()>0){
+                for(int i=0;i<params.size();i++){
+                    //判断
+                    Object obj = params.get(i);
+                    String typeName = obj.getClass().getName();
+                    if("java.lang.Integer".equals(typeName)){
+                        ps.setInt((i+1),Integer.parseInt(obj.toString()));
+                    }else if("java.lang.String".equals(typeName)){
+                        ps.setString((i+1),obj.toString());
+                    }
                 }
             }
             rs = ps.executeQuery();
