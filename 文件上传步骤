@@ -1,0 +1,11 @@
+步骤：
+1.页面表单中加入：enctype="multipart/form-data"
+2.表单元素type=file<input type="file" class="text" name="photo" />
+3.在Servlet类上加入：
+    @MultipartConfig(location = "上传地址")
+    @MultipartConfig(location = "E:\\project\\easybuy\\web\\images\\product")
+4.
+    Part part = request.getPart("photo");
+    String header = part.getHeader("Content-Disposition");
+    String fileName = header.substring(header.indexOf("filename=\"")+10,header.lastIndexOf("\""));
+    part.write(fileName);
