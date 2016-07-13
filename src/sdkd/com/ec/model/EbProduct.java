@@ -1,10 +1,12 @@
 package sdkd.com.ec.model;
 
+import java.io.Serializable;
+
 /**
  * 商品实体类
  * Created by SDUST-132 on 2016/7/8.
  */
-public class EbProduct {
+public class EbProduct implements Serializable {
     private Integer epId;
     private String epName;
     private String epDescription;

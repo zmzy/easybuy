@@ -1,11 +1,12 @@
 package sdkd.com.ec.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by SDUST-132 on 2016/7/6.
  */
-public class EbNews {
+public class EbNews implements Serializable {
     private Integer enId;
     private String enTitle;
     private String enContent;

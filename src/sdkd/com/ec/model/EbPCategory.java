@@ -1,9 +1,11 @@
 package sdkd.com.ec.model;
 
+import java.io.Serializable;
+
 /**
  * Created by SDUST-132 on 2016/7/7.
  */
-public class EbPCategory {
+public class EbPCategory implements Serializable {
     private Integer epcId;
     private String epcname;
     private Integer epcParentId;

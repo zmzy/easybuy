@@ -54,57 +54,26 @@
     您现在的位置：<a href="index.html">易买网</a> &gt; <a href="product-list.html">图书音像</a> &gt; 图书
 </div>
 <div id="main" class="wrap">
-    <div class="lefter">
-        <div class="box">
-            <h2>商品分类</h2>
-            <dl>
-                <dt>图书音像</dt>
-                <dd><a href="product-list.html">图书</a></dd>
-                <dd><a href="product-list.html">音乐</a></dd>
-                <dt>百货</dt>
-                <dd><a href="product-list.html">运动健康</a></dd>
-                <dd><a href="product-list.html">服装</a></dd>
-                <dd><a href="product-list.html">家居</a></dd>
-                <dd><a href="product-list.html">美妆</a></dd>
-                <dd><a href="product-list.html">母婴</a></dd>
-                <dd><a href="product-list.html">食品</a></dd>
-                <dd><a href="product-list.html">手机数码</a></dd>
-                <dd><a href="product-list.html">家具首饰</a></dd>
-                <dd><a href="product-list.html">手表饰品</a></dd>
-                <dd><a href="product-list.html">鞋包</a></dd>
-                <dd><a href="product-list.html">家电</a></dd>
-                <dd><a href="product-list.html">电脑办公</a></dd>
-                <dd><a href="product-list.html">玩具文具</a></dd>
-                <dd><a href="product-list.html">汽车用品</a></dd>
-            </dl>
-        </div>
-        <div class="spacer"></div>
-        <div class="last-view">
-            <h2>最近浏览</h2>
-            <dl class="clearfix">
-                <dt><img src="images/product/0_tiny.gif" /></dt>
-                <dd><a href="product-view.html">法国德菲丝松露精品巧克力500g/盒</a></dd>
-                <dt><img src="images/product/0_tiny.gif" /></dt>
-                <dd><a href="product-view.html">法国德菲丝松露精品巧克力500g/盒</a></dd>
-            </dl>
-            <script type="text/javascript">
-                document.write("Cookie中记录的购物车商品ID："+ getCookie("product") + "，可以在动态页面中进行读取");
-            </script>
-        </div>
-    </div>
+    <jsp:include page="include/left.jsp" />
     <div class="main">
         <div class="product-list">
             <h2>全部商品</h2>
             <div class="pager">
                 <ul class="clearfix">
-                    <li><a href="#">上一页</a></li>
-                    <%--<li class="current">1</li>
-                    <li><a href="#">2</a></li>--%>
+                    <input type="text" size="5" id="toPage" /><button onclick="goPage()">GO</button>
+                    <select onselect="setPageSize()">
+                        <option value="4">==显示条数==</option>
+                        <option value="4">4</option>
+                        <option value="8">8</option>
+                        <option value="10">10</option>
+                    </select>
+                    <li><a href="/pro.do?action=list&pageIndex=1">首页</a></li>
+                    <c:if test="${pageIndex>1}"><li><a href="/pro.do?action=list&pageIndex=${pageIndex-1}">上一页</a></li></c:if>
                     <c:forEach var="page" begin="1" end="${totalPage}">
                         <li><a href="/pro.do?action=list&pageIndex=${page}">${page}</a></li>
                     </c:forEach>
-
-                    <li><a href="#">下一页</a></li>
+                    <c:if test="${pageIndex<totalPage}"><li><a href="/pro.do?action=list&pageIndex=${pageIndex+1}">下一页</a></li></c:if>
+                    <li><a href="/pro.do?action=list&pageIndex=${totalPage}">末页</a></li>
                 </ul>
             </div>
             <div class="clear"></div>
@@ -122,13 +91,20 @@
             <div class="clear"></div>
             <div class="pager">
                 <ul class="clearfix">
-                    <li><a href="#">上一页</a></li>
-                    <li class="current">1</li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">下一页</a></li>
+                    <input type="text" size="5" id="toPage" /><button onclick="goPage()">GO</button>
+                    <select onselect="setPageSize()">
+                        <option value="4">==显示条数==</option>
+                        <option value="4">4</option>
+                        <option value="8">8</option>
+                        <option value="10">10</option>
+                    </select>
+                    <li><a href="/pro.do?action=list&pageIndex=1">首页</a></li>
+                    <c:if test="${pageIndex>1}"><li><a href="/pro.do?action=list&pageIndex=${pageIndex-1}">上一页</a></li></c:if>
+                    <c:forEach var="page" begin="1" end="${totalPage}">
+                        <li><a href="/pro.do?action=list&pageIndex=${page}">${page}</a></li>
+                    </c:forEach>
+                    <c:if test="${pageIndex<totalPage}"><li><a href="/pro.do?action=list&pageIndex=${pageIndex+1}">下一页</a></li></c:if>
+                    <li><a href="/pro.do?action=list&pageIndex=${totalPage}">末页</a></li>
                 </ul>
             </div>
         </div>

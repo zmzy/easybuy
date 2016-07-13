@@ -187,3 +187,9 @@ function modifyQuantity(id,index){
 function removeShopping(id,index) {
 	location.href = "shopping.do?action=remove&id="+id+"&index="+index;
 }
+
+//跳转页面
+function goPage(){
+	var toPage = document.getElementById("toPage");
+	location.href = "/pro.do?action=list&pageIndex="+toPage.value;;
+}

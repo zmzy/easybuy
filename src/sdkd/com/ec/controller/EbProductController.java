@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -59,7 +60,9 @@ public class EbProductController extends HttpServlet {
         int totalPage  = count % pageSize == 0 ?(count/pageSize):((count/pageSize)+1);
 
         request.setAttribute("productList",productList);
-        request.setAttribute("totalPage",totalPage);  //总记录数
+        request.setAttribute("totalPage",totalPage);  //总页数
+        request.setAttribute("pageIndex",pageIndex);
+
 
         //跳转页面
         request.getRequestDispatcher("/product-list.jsp").forward(request,response);
@@ -80,7 +83,49 @@ public class EbProductController extends HttpServlet {
         }
         EbProduct product = productDao.getProductById(id);
         request.setAttribute("product",product);
+
+        //TODO 最近浏览
+        recent(request, product,id);
+
         //跳转页面
         request.getRequestDispatcher("/product-view.jsp").forward(request,response);
+    }
+
+    /**
+     * 最近浏览
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    private void recent(HttpServletRequest request, EbProduct product,int id ) throws ServletException, IOException{
+        Iterator<EbProduct> it = null;
+        //去seesion中获取有没有recent
+        List<EbProduct> recentList = (List<EbProduct>)request.getSession().getAttribute("recent");
+        if(recentList==null){
+            recentList = new ArrayList<>();
+        }else{
+            it = recentList.iterator();
+            while (it.hasNext()){
+                EbProduct pro = it.next();
+                if(pro.getEpId()==id){
+                    it.remove();
+                }
+            }
+            /*for(EbProduct pro : recentList){
+                if(pro.getEpId()==id){
+                    recentList.remove(pro);   //移除原先的pro
+                }
+            }*/
+        }
+        recentList.add(product);  //
+        if(recentList.size()>5){
+//            recentList.remove(0);
+            if(it.hasNext()){
+                it.next();
+                it.remove();
+            }
+        }
+        request.getSession().setAttribute("recent",recentList);
     }
 }

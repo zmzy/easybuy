@@ -97,4 +97,20 @@ public class EbUser {
     public void setEuStatus(String euStatus) {
         this.euStatus = euStatus;
     }
+
+    @Override
+    public String toString() {
+        return "EbUser{" +
+                "euUserId='" + euUserId + '\'' +
+                ", euUserName='" + euUserName + '\'' +
+                ", euPassword='" + euPassword + '\'' +
+                ", euSex='" + euSex + '\'' +
+                ", euBirthday=" + euBirthday +
+                ", identityCode='" + identityCode + '\'' +
+                ", euEmail='" + euEmail + '\'' +
+                ", euMobile='" + euMobile + '\'' +
+                ", euAddress='" + euAddress + '\'' +
+                ", euStatus='" + euStatus + '\'' +
+                '}';
+    }
 }

@@ -40,7 +40,7 @@ public class IndexController extends HttpServlet {
 
         //获取商品分类数据
         List<EbPCategory> list = categoryDao.getCategories();
-        request.setAttribute("categoryList",list);
+        request.getSession().setAttribute("categoryList",list);
         //跳转页面
         request.getRequestDispatcher("/index.jsp").forward(request,response);
     }
