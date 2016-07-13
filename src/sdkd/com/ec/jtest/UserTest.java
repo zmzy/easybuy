@@ -31,7 +31,11 @@ public class UserTest {
 
     @Test
     public void userDetailTest(){
-        System.out.println("userDetailTest");
+        String header = "form-data; name=\"photo\"; filename=\"Desert.jpg\"";
+        System.out.println(header.indexOf("filename=\""));
+        System.out.println(header.lastIndexOf("\""));
+        String fileName = header.substring(header.indexOf("filename=\"")+10,header.lastIndexOf("\""));
+        System.out.println(fileName);
     }
 
 

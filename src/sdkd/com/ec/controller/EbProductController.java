@@ -1,13 +1,14 @@
 package sdkd.com.ec.controller;
 
 import sdkd.com.ec.dao.impl.EbProductDao;
-import sdkd.com.ec.model.EbPCategory;
 import sdkd.com.ec.model.EbProduct;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,6 +18,7 @@ import java.util.List;
  * 商品Controller
  * Created by SDUST-132 on 2016/7/8.
  */
+@MultipartConfig(location = "E:\\project\\easybuy\\web\\images\\product")
 public class EbProductController extends HttpServlet {
     EbProductDao productDao = new EbProductDao();
 
@@ -32,6 +34,8 @@ public class EbProductController extends HttpServlet {
                 list(request, response);
             }else if("detail".equals(action)){
                 detail(request, response);
+            }else if("mgrAdd".equals(action)){
+                upload(request,response);
             }
         }
 
@@ -127,5 +131,19 @@ public class EbProductController extends HttpServlet {
             }
         }
         request.getSession().setAttribute("recent",recentList);
+    }
+
+    /**
+     * 商品详情
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    private void upload(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        Part part = request.getPart("photo");
+        String header = part.getHeader("Content-Disposition");
+        String fileName = header.substring(header.indexOf("filename=\"")+10,header.lastIndexOf("\""));
+        part.write(fileName);
     }
 }
